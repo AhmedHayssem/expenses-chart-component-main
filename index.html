@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <title>Frontend Mentor | Expenses chart component</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+  :root {
+  --softRed: hsl(10, 79%, 65%);
+  --cyan: hsl(186, 34%, 60%);
+  --darkBrown: hsl(25, 47%, 15%);
+  --mediumBrown: hsl(28, 10%, 53%);
+  --cream: hsl(27, 66%, 92%);
+  --PaleOrange: hsl(33, 100%, 98%);
+  }
+    * {
+     padding: 0;
+     margin: 0;
+     box-sizing: border-box;
+     font-family: 'DM Sans', sans-serif;
+    }
+    .container {
+     width: 100%;
+     height: 100vh;
+     background: var(--cream);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+    }
+    .calender {
+     display: flex;
+     flex-direction: column;
+     gap: 5%;
+    }
+    h3 {
+     font-size: 14px;
+     font-weight: 400;
+    }
+    .calender .my-balance {
+     width: 100%;
+     height: 15%;
+     background: var(--softRed);
+     color: var(--PaleOrange);
+     gap: 10px;
+     position: relative;
+    }
+    .calender .my-balance span {
+     font-size: 25px;
+     font-weight: 700;
+    }
+    .calender .chart-card {
+     height: 80%;
+     width: 100%;
+     gap: 10%;
+     background: var(--PaleOrange);
+     position:relative;
+    }
+    .calender .chart-card .chart {
+     height: 70%;
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     position: relative;
+    }
+    .calender .chart-card .chart::after {
+     content: '';
+     width: 100%;
+     height: 2px;
+     background: var(--cream);
+     position: absolute;
+     bottom: -5%;
+    }
+    .calender .chart-card .chart h1 {
+     font-size: 20px;
+     font-weight: 700;
+     color: var(--darkBrown);
+    }
+    .calender .chart-card .chart ul {
+      display: flex;
+      gap: 3%;
+      height: 100%;
+     }
+   .calender .chart-card .chart ul li {
+    list-style: none;
+    width: calc(82% / 7);
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+    color: var(--mediumBrown);
+     }
+   .calender .chart-card .chart ul li span {
+    width: 100%;
+    background: var(--softRed);
+    display: block;
+    border-radius: 3px;
+     }
+   .calender .chart-card .chart ul li span.best {
+    background: var(--cyan);
+   }
+   .calender .chart-card .total {
+    height: 20%;
+    display: grid;
+    justify-content: space-between;
+    grid-template-areas: "thisP ." "thisN percent" "thisN last";
+    width: 100%;
+   }
+      .calender .chart-card .total span {
+      display: block;
+      
+      }
+   .calender .chart-card .total h3:first-child {
+    grid-area: thisP;
+    color: var(--mediumBrown);
+   }
+    .calender .chart-card .total h3:last-child {
+      grid-area: last;
+      color: var(--mediumBrown);
+      }
+   .calender .chart-card .total div {
+    grid-area: thisN;
+    color: var(--darkBrown);
+    font-size: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 700;
+   }
+   .calender .chart-card .total span:last-of-type {
+    grid-area: percent;
+    color: var(--darkBrown);
+    font-weight: 700;
+    text-align: right;
+   }
+    .calender .my-balance::before {
+     content: '';
+     position: absolute;
+     right: 5%;
+     width: 50px;
+     height: 50px;
+     border-radius: 50%;
+     background: var(--darkBrown);
+    }
+    .calender .my-balance::after {
+     content: '';
+     position: absolute;
+     right: 10%;
+     width: 48px;
+     height: 48px;
+     border-radius: 50%;
+     border: var(--PaleOrange) 2px solid;
+    }
+    .calender .my-balance ,
+    .calender .chart-card {
+     border-radius: 5px;
+     padding: 17px;
+     display: flex;
+     justify-content: center;
+     align-items: flex-start;
+     flex-direction: column;
+    }
+    /*mobile*/
+    
+    @media screen and (max-width:725px) {
+     .calender {
+      height: 80%;
+      width: 90%;
+     }
+    }
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+ <div class="container" >
+  <div class="calender" >
+   <div class="my-balance" >
+    <h3>My balance</h3>
+    <span>$921.48</span>
+   </div>
+   <div class="chart-card" >
+    <div class="chart" >
+     <h1>Spending - Last 7 days</h1>
+      <ul>
+       <li>mon <span></span></li>
+       <li>tue <span></span></li>
+       <li>wed <span></span></li>
+       <li>thu <span></span></li>
+       <li>fri <span></span></li>
+       <li>sat <span></span></li>
+       <li>sun <span></span></li>
+      </ul>
+ </div>
+ <div class="total" >
+  <h3>Total this month</h3>
+  <div>$478.33</div>
+
+  <span>+2.4%</span>
+  <h3>from last month</h3>
+ </div> 
+  </div>
+  </div>
+</div>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+  <script type="text/javascript">
+   let chartColumns = document.querySelectorAll('.calender .chart-card .chart ul li span');
+   let j;
+   fetch('data.json')
+   .then(response => response.json())
+   .then(data => j= data);
+   chartColumns.forEach((column , i) => {
+    column.style.height = `${j[i].amount}%`;
+   });
+   let best = 0
+   for(let i= 1;i< 7; i++){
+    if(chartColumns[i].style.height > chartColumns[i-1].style.height){
+     best = i;
+    }else {
+     best = i-1;
+    }
+   }
+   chartColumns[7-best].classList.add('best');
+  </script>
+</body>
+</html>
