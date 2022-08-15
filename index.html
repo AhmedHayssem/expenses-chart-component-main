@@ -217,7 +217,7 @@
    let j;
    fetch('data.json')
    .then(response => response.json())
-   .then(data => j= data);
+   .then(data => document.write(data));
    chartColumns.forEach((column , i) => {
     column.style.height = `${j[i].amount}%`;
    });
