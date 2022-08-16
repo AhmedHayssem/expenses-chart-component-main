@@ -218,7 +218,7 @@
    
    fetch('https://github.com/AhmedHayssem/expenses-chart-component-main/blob/main/data.json')
    .then(response => response.json())
-   .then(data => document.write(data));
+   .then(data => document.write(data[0]));
    
  /*  chartColumns.forEach((column , i) => {
     column.style.height = `${j[i].amount}%`;
