@@ -218,9 +218,9 @@
    
    fetch('https://github.com/AhmedHayssem/expenses-chart-component-main/blob/main/data.json')
    .then(response => response.json())
-   .then(data => document.write(data[0]));
+   .then(data => {j = data});
    
- /*  chartColumns.forEach((column , i) => {
+   chartColumns.forEach((column , i) => {
     column.style.height = `${j[i].amount}%`;
    });
    let best = 0
@@ -231,7 +231,7 @@
      best = i-1;
     }
    }
-   chartColumns[7-best].classList.add('best');*/
+   chartColumns[7-best].classList.add('best');
   </script>
 </body>
 </html>
