@@ -248,7 +248,7 @@
    function getChar () {
    var request = new XMLHttpRequest();
    request.onreadystatechange = function () {
-   if(this.readyState === 4 && this.status === 0){
+   if(this.readyState === 4 && this.status === 200){
    console.log(this.responseText)
     draw(JSON.parse(this.responseText));
    };
