@@ -85,12 +85,12 @@
     }
     .calender .chart-card .chart ul {
       display: flex;
-      gap: 3%;
+      gap: 2%;
       height: 100%;
      }
    .calender .chart-card .chart ul li {
     list-style: none;
-    width: calc(82% / 7);
+    width: calc(88% / 7);
     display: flex;
     align-items: center;
     flex-direction: column-reverse;
@@ -101,6 +101,8 @@
     background: var(--softRed);
     display: block;
     border-radius: 3px;
+    cursor:pointer;
+    position: relative;
      }
    .calender .chart-card .chart ul li span.best {
     background: var(--cyan);
@@ -166,12 +168,39 @@
      align-items: flex-start;
      flex-direction: column;
     }
+   .calender .chart-card .chart ul li span:hover {
+     filter: brightness(1.1);
+     display: flex;
+     justify-content: center;
+     
+   }
+   .calender .chart-card .chart ul li span:hover::after {
+    content: attr(data-cat);
+    position: absolute;
+    top: -35px;
+    z-index: 100;
+    background: #000;
+    color: #fff;
+    padding: 5px 2px;
+    border-radius: 3px;
+    font-size: 13px;
+   }
+    
     /*mobile*/
     
     @media screen and (max-width:725px) {
      .calender {
       height: 80%;
       width: 90%;
+     }
+    }
+    
+    /*desk top*/
+    
+    @media screen and (min-width:1400px) {
+     .calender {
+      width: 50%;
+      height: 75%;
      }
     }
     .attribution { font-size: 11px; text-align: center; }
@@ -189,13 +218,13 @@
     <div class="chart" >
      <h1>Spending - Last 7 days</h1>
       <ul>
-       <li>mon <span></span></li>
-       <li>tue <span></span></li>
-       <li>wed <span></span></li>
-       <li>thu <span></span></li>
-       <li>fri <span></span></li>
-       <li>sat <span></span></li>
-       <li>sun <span></span></li>
+       <li>mon <span data-cat=""></span></li>
+       <li>tue <span data-cat=""></span></li>
+       <li>wed <span data-cat=""></span></li>
+       <li>thu <span data-cat=""></span></li>
+       <li>fri <span data-cat=""></span></li>
+       <li>sat <span data-cat=""></span></li>
+       <li>sun <span data-cat=""></span></li>
       </ul>
  </div>
  <div class="total" >
@@ -216,14 +245,25 @@
    let chartColumns = document.querySelectorAll('.calender .chart-card .chart ul li span');
    let j;
    
-   fetch('data.json')
-   .then(response => response.json())
-   .then(data => {j = data
-    document.write(j.d)
-});
+   function getChar () {
+   var request = new XMLHttpRequest();
+   request.onreadystatechange = function () {
+   if(this.readyState === 4 && this.status === 0){
+   console.log(this.responseText)
+    draw(JSON.parse(this.responseText));
+   };
    
-   chartColumns.forEach((column , i) => {
-    column.style.height = `${j[i].amount}%`;
+   
+   }
+   request.open("GET" , "data.json" , true);
+   request.send();
+   }
+   getChar();
+   
+  function draw(obj) { 
+    chartColumns.forEach((column , i) => {
+    column.style.height = `${obj[i].amount}%`;
+    column.attributes['data-cat'].value = `$${obj[i].amount}`
    });
    let best = 0
    for(let i= 1;i< 7; i++){
@@ -233,7 +273,8 @@
      best = i-1;
     }
    }
-   chartColumns[7-best].classList.add('best');
+   chartColumns[best].classList.add('best');
+   }
   </script>
 </body>
 </html>
